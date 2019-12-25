@@ -29,13 +29,13 @@ export default combineReducers({
 
 export const getUser = (state) => fromAuth.getUser(state.auth);
 
-export const getSprintSubscription = (state, id) => fromSprintSubs.getSprintSubscription(state.sprintSubscriptions, id)
+export const getSprintSubscription = (state, id) => fromSprintSubs.getSprintSubscription(state.sprintSubscriptions, id);
 export const getAllSprintSubscriptions = (state) => fromSprintSubs.getAll(state.sprintSubscriptions);
 export const getCurrentSprintPlan = (state, id) => fromSprintSubs.getCurrentPlan(state.sprintSubscriptions, id);
 export const getUpcomingSprintPlan = (state, id) => fromSprintSubs.getUpcomingPlan(state.sprintSubscriptions, id);
 export const getSprintUpgradePurchase = (state, id) => fromSprintSubs.getUpgradePurchase(state.sprintSubscriptions, id);
 
-export const getAttSubscription = (state, id) => fromAttSubs.getAttSubscription(state.attSubscriptions, id)
+export const getAttSubscription = (state, id) => fromAttSubs.getAttSubscription(state.attSubscriptions, id);
 export const getAllAttSubscriptions = (state) => fromAttSubs.getAll(state.attSubscriptions);
 export const getCurrentAttPlan = (state, id) => fromAttSubs.getCurrentPlan(state.attSubscriptions, id);
 export const getUpcomingAttPlan = (state, id) => fromAttSubs.getUpcomingPlan(state.attSubscriptions, id);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchFiltered as fetchFilteredInsuranceContracts } from 'insurance/insuranceContracts/actions';
-import { getFilteredInsuranceContracts } from 'reducers';
+import { getFilteredInsuranceContracts, getAttSubscription } from 'reducers';
 import SubscriptionSwitcher from 'subscriptions/SubscriptionSwitcher';
 import Box from 'common/Box';
 import Link from 'common/Link';
@@ -19,12 +19,16 @@ export class SubscriptionScreen extends React.Component {
   }
 
   render() {
+    const { insuranceContracts, subId, status } = this.props;
+    const hasContracts = insuranceContracts.length;
+    const insuranceEligibility = !hasContracts && status && status.att_status === 'active';
+
     return (
       <div className="Subscription">
-        <SubscriptionSwitcher attSubId={this.props.subId} attRoute={routes.attSubscription} sprintRoute={routes.sprintSubscription} />
-        { !this.props.insuranceContracts.length &&
+        <SubscriptionSwitcher attSubId={subId} attRoute={routes.attSubscription} sprintRoute={routes.sprintSubscription} />
+        { insuranceEligibility &&
           <div className={styles.linkList}>
-            <Link className={styles.subscriptionLink} to={routes.attInsurance(this.props.subId)}>
+            <Link className={styles.subscriptionLink} to={routes.attInsurance(subId)}>
               <Box>
                 <img src={add_green_circle} alt={'add green circle'} />
                 Insurance
@@ -40,6 +44,7 @@ export class SubscriptionScreen extends React.Component {
 const mapStateToProps = (state, { subId }) => {
   return {
     insuranceContracts: getFilteredInsuranceContracts(state, { attSubscription: subId }),
+    status: getAttSubscription(state, subId),
   };
 };
 
