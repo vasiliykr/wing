@@ -10,6 +10,9 @@ import Link from 'common/Link';
 
 export const MainMenu = ({ user }) => (
   <Menu>
+    <Link to={routes.empty()}>Account Settings</Link>
+    <Link to={routes.empty()}>Billing</Link>
+    <Link to={logout()}>Sign Out</Link>
   </Menu>
 );
 

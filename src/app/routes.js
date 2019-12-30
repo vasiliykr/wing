@@ -15,11 +15,18 @@ export default buildRoutesMap(
   route('SPRINT_SUBSCRIPTION', '/s/subscriptions/:subId', sprintSubscriptionNavigate),
   route('ATT_SUBSCRIPTION', '/a/subscriptions/:subId', attSubscriptionNavigate),
   route('HOME', '/', homeNavigate),
+  route('EMPTY', '#'),
 );
 
 const routeDefaults = {
   type: 'router/NAVIGATE',
 }
+
+export const empty = () => ({
+  ...routeDefaults,
+  id: 'EMPTY',
+  path: '#',
+});
 
 export const home = () => ({
   ...routeDefaults,
