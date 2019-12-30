@@ -17,7 +17,6 @@ const Insurance = ({ subId, sku, insPlanId, ConfirmInsurance }) => (
     </h1>
     <InsuranceInfo attSubId={subId} />
   </div>
-)
+);
 
 export default Insurance;
-

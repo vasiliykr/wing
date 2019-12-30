@@ -17,7 +17,6 @@ const Insurance = ({ subId, sku, insPlanId, ConfirmInsurance, insurancePlanRoute
     </h1>
     <InsuranceInfo sprintSubId={subId} />
   </div>
-)
+);
 
 export default Insurance;
-

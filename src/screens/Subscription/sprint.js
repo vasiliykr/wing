@@ -19,23 +19,35 @@ export class SubscriptionScreen extends React.Component {
   }
 
   render() {
-    const { insuranceContracts, subId, status } = this.props;
+    const { insuranceContracts, subId, subscription } = this.props;
+    if (!subscription) {
+      return null;
+    }
+    const { sprint_status: status, device_specs: sku } = subscription;
     const hasContracts = insuranceContracts.length;
-    const insuranceEligibility = !hasContracts && status && status.sprint_status === 'active';
+    const insuranceEligibility = !hasContracts && status === 'active';
 
     return (
       <div className="Subscription">
         <SubscriptionSwitcher sprintSubId={subId} sprintRoute={routes.sprintSubscription} attRoute={routes.attSubscription} />
-        { insuranceEligibility &&
           <div className={styles.linkList}>
-            <Link className={styles.subscriptionLink} to={routes.sprintInsurance(subId)}>
-              <Box>
-                <img src={add_green_circle} alt={'add green circle'} />
-                Insurance
-              </Box>
-            </Link>
+            { !hasContracts &&
+              <Link className={styles.subscriptionLink} to={routes.sprintInsurance(subId)}>
+                <Box>
+                  <img src={add_green_circle} alt={'add green circle'} />
+                  Insurance
+                </Box>
+              </Link>
+            }
+            { insuranceEligibility &&
+              <Link className={styles.subscriptionLink} to={routes.sprintInsurancePlan(subId, sku)}>
+                <Box>
+                  <img src={add_green_circle} alt={'add green circle'} />
+                  Select Plan
+                </Box>
+              </Link>
+            }
           </div>
-        }
       </div>
     )
   }
@@ -44,7 +56,7 @@ export class SubscriptionScreen extends React.Component {
 const mapStateToProps = (state, { subId }) => {
   return {
     insuranceContracts: getFilteredInsuranceContracts(state, { subscription: subId }),
-    status: getSprintSubscription(state, subId),
+    subscription: getSprintSubscription(state, subId),
   };
 };
 

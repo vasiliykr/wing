@@ -19,23 +19,35 @@ export class SubscriptionScreen extends React.Component {
   }
 
   render() {
-    const { insuranceContracts, subId, status } = this.props;
+    const { insuranceContracts, subId, subscription } = this.props;
+    if (!subscription) {
+      return null;
+    }
+    const { att_status: status, device_specs: sku } = subscription;
     const hasContracts = insuranceContracts.length;
-    const insuranceEligibility = !hasContracts && status && status.att_status === 'active';
+    const insuranceEligibility = !hasContracts && status === 'active';
 
     return (
       <div className="Subscription">
         <SubscriptionSwitcher attSubId={subId} attRoute={routes.attSubscription} sprintRoute={routes.sprintSubscription} />
-        { insuranceEligibility &&
           <div className={styles.linkList}>
-            <Link className={styles.subscriptionLink} to={routes.attInsurance(subId)}>
-              <Box>
-                <img src={add_green_circle} alt={'add green circle'} />
-                Insurance
-              </Box>
-            </Link>
+            { !hasContracts &&
+              <Link className={styles.subscriptionLink} to={routes.attInsurance(subId)}>
+                <Box>
+                  <img src={add_green_circle} alt={'add green circle'} />
+                  Insurance
+                </Box>
+              </Link>
+            }
+            { insuranceEligibility &&
+              <Link className={styles.subscriptionLink} to={routes.attInsurancePlan(subId, sku)}>
+                <Box>
+                  <img src={add_green_circle} alt={'add green circle'} />
+                  Select Plan
+                </Box>
+              </Link>
+            }
           </div>
-        }
       </div>
     );
   }
@@ -44,7 +56,7 @@ export class SubscriptionScreen extends React.Component {
 const mapStateToProps = (state, { subId }) => {
   return {
     insuranceContracts: getFilteredInsuranceContracts(state, { attSubscription: subId }),
-    status: getAttSubscription(state, subId),
+    subscription: getAttSubscription(state, subId),
   };
 };
 
