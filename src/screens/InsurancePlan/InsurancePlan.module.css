@@ -1,0 +1,8 @@
+.Back {
+  margin-top: 2rem;
+}
+
+.plans {
+  display: flex;
+  justify-content: center;
+}

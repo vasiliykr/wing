@@ -1,0 +1,81 @@
+.card {
+  --accent-color: #306ee7;
+  --name-color: #333;
+  --more-color: #437ab2;
+  --starting-at-color: #888;
+  --card-bottom-bg-color: #c6c9d3;
+  --card-bottom-color: #49577e;
+  --delay: 150ms;
+  --margin-between: 1em;
+  display: flex;
+  flex: 1 1 0px;
+  flex-direction: column;
+  align-items: center;
+  transition: var(--delay);
+  margin: 1px;
+  max-width: 33%;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+.name {
+  color: var(--name-color);
+  font-size: 1.3em;
+
+  white-space: nowrap;
+  margin: var(--margin-between) 0;
+}
+
+.price {
+  color: var(--accent-color);
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.startingAt {
+  color: var(--starting-at-color);
+  font-size: 1.1em;
+}
+
+.more {
+  color: var(--more-color);
+  margin-top: var(--margin-between);
+  margin-bottom: .3em;
+  font-size: .9em;
+}
+
+.cardTop {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.cardBottom {
+  color: var(--card-bottom-color);
+  background-color: var(--card-bottom-bg-color);
+  width: 100%;
+  padding: 1rem;
+}
+
+.cardBtn {
+  color: var(--accent-color);
+  padding: .5rem;
+  background-color: white;
+  border: 1px solid var(--accent-color);
+  width: 120px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cardBtn:hover {
+  text-decoration: none;
+  color: white;
+  background-color: var(--accent-color);
+}
