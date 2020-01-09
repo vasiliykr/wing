@@ -19,6 +19,12 @@ const PlanCard = ({ insurancePlan: plan, insuranceConfirmRoute, subId, sku }) =>
         </Link>
       </div>
       <div className={styles.cardBottom}>
+        <p>Protects your device against</p>
+        <ul className={styles.list}>
+          {planInfo(plan.sku).map((item, index) => <li className={styles.listItem} key={index}>{item}</li>)}
+        </ul>
+      </div>
+      <div className={styles.cardBottom}>
         <div className={styles.info}>
           Repair Deductible: ${plan.repair_deductible}
         </div>
@@ -28,6 +34,18 @@ const PlanCard = ({ insurancePlan: plan, insuranceConfirmRoute, subId, sku }) =>
       </div>
     </div>
   )
+}
+
+const planInfo = (sku) => {
+  switch (sku) {
+    case 'WEW':
+      return ['Malfunction (after the original manufacturer\'s warranty expires)'];
+    case 'WDP3P':
+    case 'WDPP5P':
+      return ['Accidental damage', 'Loss and theft', 'Malfunction', 'Water damage', 'Broken screens'];
+    default:
+      return [''];
+  }
 }
 
 export default PlanCard;
