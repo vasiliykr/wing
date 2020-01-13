@@ -24,14 +24,14 @@ export class SubscriptionScreen extends React.Component {
       return null;
     }
     const { att_status: status, device_specs: sku } = subscription;
-    const hasContracts = insuranceContracts.length;
+    const hasContracts = insuranceContracts.length > 0;
     const insuranceEligibility = !hasContracts && status === 'active';
 
     return (
       <div className="Subscription">
         <SubscriptionSwitcher attSubId={subId} attRoute={routes.attSubscription} sprintRoute={routes.sprintSubscription} />
           <div className={styles.linkList}>
-            { !hasContracts &&
+            { hasContracts &&
               <Link className={styles.subscriptionLink} to={routes.attInsurance(subId)}>
                 <Box>
                   <img src={add_green_circle} alt={'add green circle'} />
