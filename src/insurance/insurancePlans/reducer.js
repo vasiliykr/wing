@@ -12,3 +12,4 @@ const isForValue = (plan, value) => {
 }
 export const getValue = (state, value) => getResources(state, plan => isForValue(plan, value));
 export const get = (state, id) => state.resources[id];
+export const getAll = (state) => state.resources;

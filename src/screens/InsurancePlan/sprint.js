@@ -1,46 +1,20 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import * as routes from 'app/routes';
-import Back from 'common/Back';
-import styles from './InsurancePlan.module.css';
-import { fetchValue } from '../../insurance/insurancePlans/api';
-import PlanCard from '../../insurance/insurancePlans/PlanCard';
+import { fetchValue as fetchPlans } from '../../insurance/insurancePlans/actions';
+import InsurancePlan from './InsurancePlan';
+import { getInsurancePlans } from '../../reducers';
 
-export class SprintInsurancePlan extends React.Component {
-  constructor(props) {
-    super(props);
+const mapStateToProps = (state) => ({
+  insurancePlans: Object.values(getInsurancePlans(state)),
+  backRoute: routes.sprintSubscription,
+  confirmRoute: routes.sprintInsuranceConfirm,
+});
 
-    this.state = {
-      plans: [],
-    }
-  }
+const mapDispatchToProps = {
+  fetchPlans,
+};
 
-  componentDidMount() {
-    fetchValue('something').then(plans => {
-      this.setState({ plans: plans.data.results });
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <div className={styles.Back}>
-          <Back to={routes.sprintSubscription(this.props.subId)} />
-        </div>
-        <h1>
-          Select an insurance plan
-        </h1>
-        <div className={styles.plans}>
-        {this.state.plans.map(plan => (
-            <PlanCard
-              insurancePlan={plan}
-              key={plan.id}
-              insuranceConfirmRoute={routes.sprintInsuranceConfirm}
-              {...this.props} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-}
-
-export default SprintInsurancePlan;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(InsurancePlan);

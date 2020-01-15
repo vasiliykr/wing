@@ -48,6 +48,7 @@ export const getDevice = (state, id) => fromDevices.get(state.devices, id);
 export const getFilteredDevices = (state) => fromDevices.getFiltered(state.devices);
 
 export const getInsurancePlan = (state, id) => fromInsurancePlans.get(state.insurancePlans, id);
+export const getInsurancePlans = (state) => fromInsurancePlans.getAll(state.insurancePlans);
 export const getInsurancePlansForValue = (state, value) => fromInsurancePlans.getValue(state.insurancePlans, value);
 
 export const getFilteredInsuranceContracts = (state, params) => fromInsuranceContracts.getFiltered(state.insuranceContracts, params);
