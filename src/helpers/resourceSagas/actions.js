@@ -23,6 +23,30 @@ export const getAllFailed = (resourceType, err, actionProps) => ({
   type: resourceActions.READ_RESOURCES_FAILED,
 });
 
+// Create
+const createDefaults = {
+  requestKey: 'create',
+}
+export const createPending = (resourceType, actionProps) => ({
+  ...createDefaults,
+  ...actionProps,
+  resourceType,
+  type: resourceActions.CREATE_RESOURCES_PENDING,
+});
+export const createSucceeded = (resourceType, response, transformResp = (resp) => { return [resp.data] }, actionProps) => ({
+  ...createDefaults,
+  ...actionProps,
+  resourceType,
+  type: resourceActions.CREATE_RESOURCES_SUCCEEDED,
+  resources: transformResp(response),
+});
+export const createFailed = (resourceType, err, actionProps) => ({
+  ...createDefaults,
+  ...actionProps,
+  resourceType,
+  type: resourceActions.CREATE_RESOURCES_FAILED,
+});
+
 const findDefaults = {
   requestKey: 'find',
 }

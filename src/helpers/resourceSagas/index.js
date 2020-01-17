@@ -54,6 +54,22 @@ export const updateGenerator = ({ resourceType, endpoint, endpointArgs, transfor
   }
 }
 
+export const createGenerator = ({ resourceType, endpoint, endpointArgs, transformResponse, actionProps = {} }) => {
+  return function* (action) {
+    const defaultArgs = (payload) => [ payload.id ];
+    endpointArgs = endpointArgs || defaultArgs;
+    const args = endpointArgs(action.payload);
+    try {
+      yield put(actions.createPending(resourceType, actionProps));
+      const resp = yield call(endpoint, ...args);
+      yield put(actions.createSucceeded(resourceType, resp, transformResponse, actionProps));
+    }
+    catch (err) {
+      yield put(actions.createFailed(resourceType, err, actionProps));
+    }
+  }
+}
+
 export const getAllPaginatedGenerator = ({ resourceType, endpoint, endpointArgs, transformResponse, actionProps = {} }) => {
   return function* (action) {
     const args = endpointArgs(action.payload);
