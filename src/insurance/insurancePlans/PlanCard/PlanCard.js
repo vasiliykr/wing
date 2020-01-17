@@ -34,10 +34,10 @@ const PlanCard = ({ insurancePlan: plan, insuranceConfirmRoute, subId, sku }) =>
       </div>
     </div>
   )
-}
+};
 
-const planInfo = (sku) => {
-  switch (sku) {
+const planInfo = (planSku) => {
+  switch (planSku) {
     case 'WEW':
       return ['Malfunction (after the original manufacturer\'s warranty expires)'];
     case 'WDP3P':
@@ -46,6 +46,6 @@ const planInfo = (sku) => {
     default:
       return [''];
   }
-}
+};
 
 export default PlanCard;

@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
   });
   const filteredAttSubs = attSubs && attSubs.filter(sub => {
     const contracts = getFilteredInsuranceContracts(state, { attSubscription: sub.id });
-    return (sub.att_status == 'active') && (!contracts || contracts.length === 0);
+    return (sub.att_status === 'active') && (!contracts || contracts.length === 0);
   });
   return {
     userId: getUser(state) && getUser(state).id,

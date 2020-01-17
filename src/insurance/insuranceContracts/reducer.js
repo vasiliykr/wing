@@ -11,5 +11,5 @@ export const getFiltered = (state, { subscription = null, attSubscription = null
   }
   return (contract.subscription === subscription) && (contract.att_subscription === attSubscription) && (!userId || contract.user_profile === userId);
 });
-export const get = (state, id) => state.resources[id];
 
+export const get = (state, id) => state.resources[id];
