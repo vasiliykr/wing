@@ -11,3 +11,7 @@ export const fetchFiltered = (params) => ({
   payload: { params },
 });
 
+export const create = (attrs) => ({
+  type: types.CREATE,
+  payload: { attrs },
+});

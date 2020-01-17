@@ -17,6 +17,12 @@ export const fetchFiltered = getAllGenerator({
   endpointArgs: (payload) => [ payload.params ],
 });
 
+export const create = updateGenerator({
+  resourceType: 'insuredDevices',
+  endpoint: api.create,
+  endpointArgs: (payload) => [ payload.attrs ],
+});
+
 export function* watchFind() {
   yield takeEvery(types.FIND, find);
 }
@@ -26,10 +32,15 @@ export function* watchFetchFiltered() {
   yield takeLatest(types.FETCH_FILTERED, fetchFiltered);
 }
 
+export function* watchCreate() {
+  yield takeLatest(types.CREATE, create);
+}
+
 export function* watchInsuredDevices() {
   console.log('watchInsuredDevices');
   yield all([
     call(watchFind),
     call(watchFetchFiltered),
+    call(watchCreate),
   ]);
 }
